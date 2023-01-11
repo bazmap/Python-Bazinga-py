@@ -1,0 +1,52 @@
+# Fichier de configuration
+
+# Ce fichier est le fichier de configuration utilisé par défaut.
+# L'argument "--configFile" permet d'utiliser une autre fichier de configuration
+# Les valeurs passées en argument auront la priorité sur les valeurs définie dans ce fichier.
+
+
+
+[Général]
+logFileNumber=10
+# Nombre de fichier de log à conserver.
+# Valeur attendue : Nombre entier
+
+
+
+[Emplacement]
+cheminData=c:\Users\abazin\Documents\2 - Client\1 - Projets\EPT 9 - GPGE - Grand Paris Grand Est\2022-05 - GEO AC\Import AC\import_pyogr\data
+# Les fichiers à importer sont par défaut considérés comme étant dans le répertoire 'Données' de ce script. Cette option permet de modifier l'emplacement des fichiers.# Valeur attendue : Chemin absolu vers un répertoire
+
+cheminPostTraitement=c:\Users\abazin\Documents\2 - Client\1 - Projets\EPT 9 - GPGE - Grand Paris Grand Est\2022-05 - GEO AC\Import AC\import_pyogr\data
+# Les fichiers de post-traitement sont par défaut considérés comme étant dans le même répertoire que les fichiers à importer. Cette option permet de spécifier un autre répertoire. Ces fichiers doivent obligatoirement porter le même nom que le fichier importé et se terminer par .sql.
+# Valeur attendue : Chemin absolu vers un répertoire
+
+postTraitementFinal=None
+# Post-traitement final à appliquer une fois tous les imports et post-traitements réalisés. Le nom d'un fichier dans le répertoire des post-traitement est attendu (y compris l'extension). Les fichiers de post-traitement sont par défaut considérés comme étant dans le même répertoire que les fichiers à importer (voir l'option cheminPostTraitement).
+# Valeur attendue : Nom de fichier : xyz.sql
+
+
+
+[Archivage]
+archivageData=None
+# Avec cette option, les fichiers de données seront archivés dans le répertoire d'historisation à chaque import.
+# Valeur attendue : Booléen : True/False
+
+archivagePostTraitement=None
+# Avec cette option, les fichiers de post-traitement seront archivés dans le répertoire d'historisation à chaque import.
+# Valeur attendue : Booléen : True/False
+
+
+
+[BDD Destination]
+connexionString=postgresql://postgres:postgres@127.0.0.1:5435/integration
+# Ligne de connexion à la base de données.
+# Valeur attendue : URI : bddtype://[user[:password]@][host][:port][/dbname]
+
+schemaImport=import_pyogr
+# Nom du schéma d'import des données
+# Valeur attendue : Texte : mon_schema
+
+importMethod=overwrite
+# Méthode d'import des données : 'overwrite' pour écraser la structure et les données précédente ou 'append' pour ajouter les données.
+# Valeur attendue : Texte : overwrite/append
