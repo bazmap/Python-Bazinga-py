@@ -28,7 +28,7 @@ app.pack(
 # Bouton 1
 app.Button_1.bind(
 	'<ButtonPress-1>', 
-	lambda event: rootWindows.widget_var['ma_variable'].set('Bouton 1')
+	lambda event: ba_app_var['param']['init_tk']['ma_variable']['value'].set('Bouton 1')
 )
 
 
@@ -36,7 +36,7 @@ app.Button_1.bind(
 # Bouton 2
 app.Button_2.bind(
 	'<ButtonPress-1>', 
-	lambda event: rootWindows.widget_var['ma_variable'].set('Bouton 2')
+	lambda event: ba_app_var['param']['init_tk']['ma_variable']['value'].set('Bouton 2')
 )
 
 
@@ -44,7 +44,7 @@ app.Button_2.bind(
 # Bouton 3
 app.Button_3.bind(
 	'<ButtonPress-1>', 
-	lambda event: rootWindows.widget_var['ma_variable'].set('Bouton 3')
+	lambda event: ba_app_var['param']['init_tk']['ma_variable']['value'].set(ba_app_var['param']['init']['ma_variable']['value'])
 )
 
 

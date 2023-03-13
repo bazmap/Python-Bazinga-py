@@ -32,7 +32,7 @@ if __name__ != '__main__':
 # Framework
 app_var['framework'] = dict(
 	name = "bazinga_py",
-	version = "1.2",
+	version = "1.0",
 	dir = os.path.join(os.path.dirname(__file__), '..\\')
 )
 
@@ -44,9 +44,13 @@ app_var['software'] = dict(
 	version = "0.0",
 	resume = "",
 	author = "",
-	copyright = app_var['execution_date'].strftime("%Y") + "",
+	copyright = datetime.datetime.now().strftime("%Y") + "",
 	dir = os.path.dirname(fileStack[-1]),
-	main_file = os.path.basename(fileStack[-1]),
+	config_dir = os.path.join(
+		os.path.dirname(fileStack[-1]), 
+		'config'
+	),
+	config_file_default = 'default.conf',
 	logo = os.path.normpath(os.path.join(app_var['framework']['dir'], 'media\\software_icon.gif'), ),
 	icon = os.path.normpath(os.path.join(app_var['framework']['dir'], 'media\\software_icon.gif'), ),
 	splash_screen = os.path.normpath(os.path.join(app_var['framework']['dir'], 'media\\software_splash_screen.gif'), )
@@ -67,37 +71,15 @@ app_var['log'] = dict(
 
 
 
-# Config
-app_var['config_file'] = dict (
-	dir = os.path.join(app_var['software']['dir'], 'config'),
-	default_file = 'default.conf'
-)
-
-
-
-# Librairies annexes
-app_var['libraries'] = dict (
-	dir = os.path.join(app_var['software']['dir'], 'lib'),
-)
-
-
-
-# Binaires annexes
-app_var['binaries'] = dict (
-	dir = os.path.join(app_var['software']['dir'], 'bin'),
-)
-
-
-
 # Initialisation des variables de configuration et d'arguments
-app_var['config'] = dict()
+app_var['param'] = dict()
 
-app_var['config']['framework'] = {
+app_var['param']['framework'] = {
 	'configFile': {
 		'input_scope' : ['argument'],
 		'type' : 'string',
-		'default' : app_var['config_file']['default_file'],
-		'default_user' : None,
+		'value' : app_var['software']['config_file_default'],
+		'value_user' : None,
 		'expected': 'Nom d\'un fichier en ".conf"',
 		'group': 'Général',
 		'help' : "Nom du fichier de configuration à utiliser. Les valeurs passées en argument seront utilisées à la place de celles spécifiées dans le fichier de configuration."
@@ -105,7 +87,7 @@ app_var['config']['framework'] = {
 	'printConfigFile': {
 		'input_scope' : ['argument'],
 		'type' : 'boolean',
-		'default' : False,
+		'value' : False,
 		'expected': 'True/False',
 		'group': 'Général',
 		'help' : "Affichage d'un fichier de configuration par défaut. Aucun traitement n'est effectué."
@@ -113,7 +95,7 @@ app_var['config']['framework'] = {
 	'logFileNumber': {
 		'input_scope' : ['argument','config'],
 		'type' : 'integer',
-		'default' : app_var['log']['nb_to_keep'],
+		'value' : app_var['log']['nb_to_keep'],
 		'expected': 'n',
 		'group': 'Log',
 		'help' : "Nombre de fichier de log à conserver."
@@ -121,7 +103,7 @@ app_var['config']['framework'] = {
 	'surpriseMe': {
 		'input_scope' : ['argument'],
 		'type' : 'boolean',
-		'default' : False,
+		'value' : False,
 		'expected': 'True/False',
 		'group': 'Général',
 		'help' : "A vous de voir."
@@ -135,4 +117,4 @@ app_var['config']['framework'] = {
 #######################
 
 # Liste de variables spécifiques au programme
-app_var['specific'] = dict()
+app_var['var'] = dict()

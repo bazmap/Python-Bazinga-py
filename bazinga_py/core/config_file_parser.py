@@ -46,7 +46,7 @@ def configLoader(file_path):
 		var_config = parserVarExtractor(parser)
 
 	# Renvoie des valeurs
-	return var_config, parser
+	return var_config
 
 
 

@@ -103,7 +103,7 @@ class splashScreen(ba_tk.Toplevel):
 
 		# Ajout du titre
 		self.canvasTitle = self.canvas.create_text(
-			self.windowWidth - 20,
+			self.windowWidth - 10,
 			10,
 			anchor = "ne",
 			text = app_var['software']['name'],
@@ -115,7 +115,7 @@ class splashScreen(ba_tk.Toplevel):
 
 		# Ajout de la version
 		self.canvasVersion = self.canvas.create_text(
-			self.windowWidth - 20,
+			self.windowWidth - 10,
 			self.canvas.bbox(self.canvasTitle)[3] - 5,
 			anchor = "ne",
 			text = 'v' + app_var['software']['version'],

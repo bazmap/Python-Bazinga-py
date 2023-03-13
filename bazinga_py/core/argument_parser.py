@@ -13,8 +13,13 @@ def argumentParser(software_info, config_var_default):
 
 	# Création d'un parser
 	parser = argparse.ArgumentParser(
-		description = software_info['name'] + '\n' + "Version : " + software_info['version'] + '\n' + software_info['resume'],
-		epilog = "Merci d'utiliser ce programme" + '\n' + software_info['author'] + " - " + software_info['copyright'],
+		description = 
+			software_info['name'] + '\n' + 
+			"Version : " + software_info['version'] + '\n' + 
+			software_info['resume'],
+		epilog = 
+			"Merci d'utiliser ce programme" + '\n' + 
+			software_info['author'] + " - " + software_info['copyright'],
 		formatter_class=argparse.RawTextHelpFormatter
 	)
 
@@ -25,14 +30,14 @@ def argumentParser(software_info, config_var_default):
 
 		# Récupération de la valeur par défaut pour l'argument
 		if 'default_user' in config_var_default[key]:
-			default_arg = str(config_var_default[key]['default_user'] or 'None')
+			default_arg = str(config_var_default[key]['value_user'] or 'None')
 		else:
-			default_arg = str(config_var_default[key]['default'] or 'None')
+			default_arg = str(config_var_default[key]['value'] or 'None')
 
 		# Définition de l'action
 		if config_var_default[key]['type'] == 'boolean':
 			action_arg = 'store_const'
-			const_arg = not config_var_default[key]['default']
+			const_arg = not config_var_default[key]['value']
 		else:
 			action_arg = 'store'
 			const_arg = None
@@ -49,7 +54,7 @@ def argumentParser(software_info, config_var_default):
 			'--' + key,
 			action = action_arg,
 			const = const_arg,
-			default = config_var_default[key]['default'],
+			default = config_var_default[key]['value'],
 			help = help_arg
 		)
 
@@ -63,6 +68,11 @@ def argumentParser(software_info, config_var_default):
 
 
 	# Récupération des variables à utiliser
-	variables = vars(parser.parse_args())
+	variables = dict()
+
+	for key, value in vars(parser.parse_args()).items():
+		variables[key] = {
+			'value' : value
+		}
 
 	return variables

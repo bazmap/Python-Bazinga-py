@@ -164,38 +164,11 @@ class helpScreen(ba_tk.Toplevel):
 
 
 
-		# Texte d'introduction
-		self.widget['intro'] = ba_tk.Text(
-			self.widget['frame'],
-			cursor = 'arrow',
-			relief = 'flat',
-			wrap = 'word',
-			borderwidth = 0
-		)
-		self.widget['intro'].grid(
-			row = 0, 
-			column = 0, 
-			columnspan = 2,
-			sticky = "nsew",
-			padx = 10,
-			pady = (0, 5)
-		)
-
-		self.widget['intro'].insertResize('end', 'Les paramètres suivants peuvent être utilisés lors de l\'appel du programme en ligne de commande.\nLe format à utiliser est le suivant :\n', 'intro')
-
-		self.widget['intro'].insertResize('end', 'Python ' + app_var['software']['main_file'] + ' --mon_paramètre1 ma_valeur --mon_paramètre2 ma_valeur', 'valeur')
-
-		self.widget['intro'].tag_config(
-			"valeur",
-			font = self.font_custom_value
-		)
-		
-
-
 		# Listing des paramètres utilisables
-		for iteration, my_param in enumerate(app_var['config']['default']):
+		for iteration, my_param in enumerate(app_var['param']['software']):
 
-			if app_var['config']['default'][my_param]['input_scope'] != []:
+			if app_var['param']['software'][my_param]['input_scope'] != []:
+
 				# Ajout d'un titre
 				self.widget[my_param + '_titre'] = ttk.Label(
 					self.widget['frame'],
@@ -205,13 +178,12 @@ class helpScreen(ba_tk.Toplevel):
 					font = self.font_custom_title
 				)
 				self.widget[my_param + '_titre'].grid(
-					row = iteration + 1, 
+					row = iteration, 
 					column = 0, 
 					sticky = "ne"
 				)
 
 				# Ajout de la définition
-
 				self.widget[my_param + '_def'] = ba_tk.Text(
 					self.widget['frame'],
 					width = 110,
@@ -221,7 +193,7 @@ class helpScreen(ba_tk.Toplevel):
 					borderwidth = 0
 				)
 				self.widget[my_param + '_def'].grid(
-					row = iteration + 1, 
+					row = iteration, 
 					column = 1, 
 					sticky = "nw",
 					padx = 10,
@@ -229,15 +201,15 @@ class helpScreen(ba_tk.Toplevel):
 				)
 
 				# Définition :
-				if 'default_user' in app_var['config']['default'][my_param]:
-					default_value = str(app_var['config']['default'][my_param]['default_user'] or 'None')
+				if 'default_user' in app_var['param']['software'][my_param]:
+					default_value = str(app_var['param']['software'][my_param]['value_user'] or 'None')
 				else:
-					default_value = str(app_var['config']['default'][my_param]['default'] or 'None')
+					default_value = str(app_var['param']['software'][my_param]['value'] or 'None')
 
-				self.widget[my_param + '_def'].insert('end', app_var['config']['default'][my_param]['help'])
+				self.widget[my_param + '_def'].insert('end', app_var['param']['software'][my_param]['help'])
 
 				self.widget[my_param + '_def'].insert('end', '\n' + 'Valeur attendue : ', "parametre")
-				self.widget[my_param + '_def'].insert('end', app_var['config']['default'][my_param]['type'] + ' - ' + app_var['config']['default'][my_param]['expected'], 'valeur')
+				self.widget[my_param + '_def'].insert('end', app_var['param']['software'][my_param]['type'] + ' - ' + app_var['param']['software'][my_param]['expected'], 'valeur')
 
 				self.widget[my_param + '_def'].insert('end', '\n' + 'Valeur par défaut : ', "parametre")
 				self.widget[my_param + '_def'].insertResize('end', default_value, 'valeur')

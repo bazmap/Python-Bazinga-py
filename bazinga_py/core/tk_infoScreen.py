@@ -60,17 +60,10 @@ class infoScreen(ba_tk.Toplevel):
 			weight = "normal",
 			slant = "italic"
 		)
-		self.font_custom_framework = tkFont.Font(
-			family = functions.checkFontAvailability(['Arial']),
-			size = tkFont.nametofont("TkDefaultFont").actual()['size'] - 1,
-			weight = "normal",
-			slant = "italic"
-		)
 
 		# Couleurs
 		self.color_background = "#0099FF"
 		self.color_foreground = "#fff"
-		self.color_foreground_framework = "#bbbbbb"
 
 		# Image du splash screen
 		self.splashImage = tk.PhotoImage(file = app_var['software']['splash_screen'])
@@ -120,7 +113,7 @@ class infoScreen(ba_tk.Toplevel):
 
 		# Ajout du titre
 		self.canvasTitle = self.canvas.create_text(
-			self.windowWidth - 20,
+			self.windowWidth - 15,
 			10,
 			anchor = "ne",
 			text = app_var['software']['name'],
@@ -131,7 +124,7 @@ class infoScreen(ba_tk.Toplevel):
 
 		# Ajout de la version
 		self.canvasVersion = self.canvas.create_text(
-			self.windowWidth - 20,
+			self.windowWidth - 15,
 			self.canvas.bbox(self.canvasTitle)[3] - 5,
 			anchor = "ne",
 			text = 'v' + app_var['software']['version'],
@@ -140,41 +133,10 @@ class infoScreen(ba_tk.Toplevel):
 			tags = 'title'
 		)
 
-		# Ajout des mentions framework
-		self.canvasFramework = self.canvas.create_text( 
-			self.windowWidth / 2,
-			self.windowHeight - 10,
-			anchor = "s",
-			text = (
-				"Framework " + app_var['framework']['name'] + '\n' +
-				'v' + app_var['framework']['version'] + ' - ' + app_var['execution_date'].strftime("%Y") + ' - Arthur Bazin'
-			),
-			fill = self.color_foreground_framework,
-			font = self.font_custom_framework,
-			justify = 'center',
-			width = self.windowWidth - 50,
-			tags = 'message'
-		)
-
-		# Ajout des mentions framework
-		self.canvasFrameworkLimit = self.canvas.create_text( 
-			self.windowWidth / 2,
-			self.canvas.bbox(self.canvasFramework)[1] - 6,
-			anchor = "s",
-			text = (
-				"____________________"
-			),
-			fill = self.color_foreground_framework,
-			font = self.font_custom_framework,
-			justify = 'center',
-			width = self.windowWidth - 50,
-			tags = 'message'
-		)
-
-		# Ajout de l'auteur + mention
+		# Ajout d'un texte
 		self.canvasMentions = self.canvas.create_text( 
 			self.windowWidth / 2,
-			self.canvas.bbox(self.canvasFrameworkLimit)[1] + 3,
+			self.windowHeight - 10,
 			anchor = "s",
 			text = app_var['software']['author'] + '\n' +app_var['software']['copyright'] ,
 			fill = self.color_foreground,
@@ -184,7 +146,7 @@ class infoScreen(ba_tk.Toplevel):
 			tags = 'message'
 		)
 
-		# Ajout de la description
+		# Ajout d'un texte
 		self.canvasMessage = self.canvas.create_text( 
 			self.windowWidth / 2,
 			self.canvas.bbox(self.canvasMentions)[1] - 5,

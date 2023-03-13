@@ -16,9 +16,11 @@ from bazinga_py.core.config_default import app_var
 app_var['software']['name'] = "Mon programme"
 app_var['software']['version'] = "1.0"
 app_var['software']['resume'] = "Programme de test du framework Bazinga PY"
-app_var['software']['author'] = "John Doe"
-app_var['software']['copyright'] = datetime.datetime.now().strftime("%Y") + " - Big Society Inc"
+app_var['software']['author'] = "Arthur Bazin"
+app_var['software']['copyright'] = datetime.datetime.now().strftime("%Y") + " - www.arthurbazin.com"
 #app_var['software']['dir'] = ""
+#app_var['config_dir']['config_dir'] = os.path.join(app_var['software']['dir'], 'config')
+#app_var['config_dir']['config_file_default'] = 'default.conf'
 #app_var['software']['logo'] = ""
 #app_var['software']['icon'] = ""
 #app_var['software']['splash_screen'] = ""
@@ -36,40 +38,27 @@ app_var['software']['copyright'] = datetime.datetime.now().strftime("%Y") + " - 
 
 
 
-# Config
-#app_var['config_file']['dir'] = os.path.join(app_var['software']['dir'], 'config')
-#app_var['config_file']['default_file'] = 'default.conf'
-
-
-
-# Librairies annexes
-#app_var['libraries']['dir'] = os.path.join(app_var['software']['dir'], 'lib')
-
-
-
-# Binaires annexes
-#app_var['binaries']['dir'] = os.path.join(app_var['software']['dir'], 'bin')
-
-
-
 # Initialisation des variables de configuration et d'arguments
-app_var['config']['specific'] = {
+app_var['param']['config_framework'] = {
 	'ma_variable': {
 		'input_scope' : ['argument','config'],
 		'type' : 'string',
-		'default' : 'Valeur par défaut',
+		'value' : 'Valeur initiale',
+		'value_user' : None,
 		'expected': 'Un texte au hasard',
 		'group': 'Groupe 1',
-		'help' : "Variable de démonstration."
+		'label': 'Cette variable fait cela',
+		'help' : 'Variable de démonstration numéro 1.'
 	},
 	'ma_variable_2': {
 		'input_scope' : ['argument','config'],
-		'type' : 'string',
-		'default' : 'Valeur par défaut',
-		'expected': 'Un texte au hasard',
-		'group': 'Général',
-		'help' : "Variable de démonstration."
-	},
+		'type' : 'integer',
+		'value' : 14,
+		'expected': 'Un nombre entier',
+		'group': 'Groupe 2',
+		'label': 'Cette variable fait ceci',
+		'help' : "Variable de démonstration numéro 2."
+	}
 }
 
 
@@ -78,7 +67,7 @@ app_var['config']['specific'] = {
 # Variables spécifiques
 #######################
 
-# Variable de démonstration
-app_var['specific']['ma_varaible_2'] = "Variable de démonstration."
+# Formats spatiaux
+app_var['var']['variable1'] = 'Une petite démo'
 
 

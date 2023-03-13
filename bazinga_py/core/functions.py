@@ -5,6 +5,7 @@
 
 # Modules requis
 import os
+import copy
 import json
 import tkinter as tk
 import random
@@ -46,11 +47,7 @@ def getConfigVar(standard_config, var_configFile, var_args):
 		# Valeur de l'argument
 
 	# Initialisation de la valeur par copie de la configuration standard
-	final_config = standard_config.copy()
-
-	# Création d'une variable contenant la valeur
-	for key in final_config:
-		final_config[key]['value'] = final_config[key]['default']
+	final_config = copy.deepcopy(standard_config)
 
 
 
@@ -73,8 +70,9 @@ def getConfigVar(standard_config, var_configFile, var_args):
 	# Récupération des valeurs des arguments
 	for key in var_args:
 
-		if standard_config[key]['default'] != var_args[key]:
+		if standard_config[key]['value'] != var_args[key]['value']:
 			final_config[key]['value'] = var_args[key]
+
 
 
 	return final_config
@@ -137,16 +135,7 @@ ABAB    ABABABABABABABABABABABABABA    ABABABABABABABABABAB
 """
 
 	message[2] ="""
-BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG        
-BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG        
-BGBG                                                                        
-BGBG                                                                        
-BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG    BGBG    BGBG        
-BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG    BGBG    BGBG        
-BGBG            BGBG                            BGBG            BGBG        
-BGBG            BGBG                            BGBG            BGBG        
-BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG
-BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG
+Venez voir https://www.arthurbazin.com
 """
 
 	return message[random.randint(1, 2)]
@@ -191,10 +180,10 @@ def retrieveConfigFile(config_var, default = True):
 
 				if default == True:
 					if 'default_user' in config_var[key]:
-						config_file_content += str(config_var[key]['default_user'] or 'None')
+						config_file_content += str(config_var[key]['value_user'] or 'None')
 					
 					else:
-						config_file_content += str(config_var[key]['default'] or 'None')
+						config_file_content += str(config_var[key]['value'] or 'None')
 				
 				else:
 					config_file_content += str(config_var[key]['value'] or 'None')

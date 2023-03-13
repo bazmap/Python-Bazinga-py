@@ -5,6 +5,7 @@
 
 # Modules requis
 import os
+import copy
 import tkinter as tk
 from tkinter import filedialog as fd
 
@@ -72,8 +73,8 @@ class rootWindows(ba_tk.Tk):
 
 		# Suppression de l'écran d'accueil
 		self.after(2000, logger.info("Fermeture écran d'accueil"))
-		self.after(2000, self.splashScreen.destroy)
-		self.after(2000, self.focus_force)
+		self.after(000, self.splashScreen.destroy)
+		self.after(000, self.focus_force)
 
 		self.mainloop()
 
@@ -100,25 +101,31 @@ class rootWindows(ba_tk.Tk):
 	# Fonction d'association des variables de configuration aux variables tkinter
 	def setWidgetVar(self):
 
-		self.widget_var = dict()
+		app_var['param']['init_tk'] = dict()
 
-		for key in (app_var['config']['init']):
 
-			if app_var['config']['init'][key]['type'] == 'boolean':
-				self.widget_var[key] = tk.BooleanVar()
-				self.widget_var[key].set(bool(app_var['config']['init'][key]['value']))
+		for key in (app_var['param']['init']):
 
-			elif app_var['config']['init'][key]['type'] == 'integer':
-				self.widget_var[key] = tk.IntVar()
-				self.widget_var[key].set(int(app_var['config']['init'][key]['value'] or 0))
+			app_var['param']['init_tk'][key] = copy.deepcopy(app_var['param']['init'][key])
+			app_var['param']['init_tk'][key].pop('value')
 
-			elif app_var['config']['init'][key]['type'] == 'float':
-				self.widget_var[key] = tk.DoubleVar()
-				self.widget_var[key].set(float(app_var['config']['init'][key]['value'] or 0))
+
+			if app_var['param']['init'][key]['type'] == 'boolean':
+				app_var['param']['init_tk'][key]['value'] = tk.BooleanVar()
+				app_var['param']['init_tk'][key]['value'].set(bool(app_var['param']['init'][key]['value']))
+
+			elif app_var['param']['init'][key]['type'] == 'integer':
+				app_var['param']['init_tk'][key]['value'] = tk.IntVar()
+				app_var['param']['init_tk'][key]['value'].set(int(app_var['param']['init'][key]['value'] or 0))
+
+			elif app_var['param']['init'][key]['type'] == 'float':
+				app_var['param']['init_tk'][key]['value'] = tk.DoubleVar()
+				app_var['param']['init_tk'][key]['value'].set(float(app_var['param']['init'][key]['value'] or 0))
 
 			else:
-				self.widget_var[key] = tk.StringVar()
-				self.widget_var[key].set(str(app_var['config']['init'][key]['value'] or ''))
+				app_var['param']['init_tk'][key]['value'] = tk.StringVar()
+				app_var['param']['init_tk'][key]['value'].set(str(app_var['param']['init'][key]['value'] or ''))
+
 
 
 
@@ -146,7 +153,7 @@ class rootWindows(ba_tk.Tk):
 		file = fd.askopenfilename(
 			title = "Choisir un fichier de configuration",
 			filetypes = [("Fichier de configuration", ".conf"), ("All files", ".*")],
-			initialdir = app_var['config_file']['dir']
+			initialdir = app_var['software']['config_dir']
 		)
 
 
@@ -155,41 +162,42 @@ class rootWindows(ba_tk.Tk):
 
 
 		# Association à une variable
-		for key in (var_configParse[0]):
+		for key in (var_configParse):
 
-			if key not in self.widget_var:
+			if key not in app_var['param']['init_tk']:
 
-				if key in app_var['config']['init']:
-					if app_var['config']['init'][key]['type'] == 'boolean':
-						self.widget_var[key] = tk.BooleanVar()
-					elif app_var['config']['init'][key]['type'] == 'integer':
-						self.widget_var[key] = tk.IntVar()
-					elif app_var['config']['init'][key]['type'] == 'float':
-						self.widget_var[key] = tk.DoubleVar()
+				if key in app_var['param']['init']:
+					if app_var['param']['init'][key]['type'] == 'boolean':
+						app_var['param']['init_tk'][key]['value'] = tk.BooleanVar()
+					elif app_var['param']['init'][key]['type'] == 'integer':
+						app_var['param']['init_tk'][key]['value'] = tk.IntVar()
+					elif app_var['param']['init'][key]['type'] == 'float':
+						app_var['param']['init_tk'][key]['value'] = tk.DoubleVar()
 					else:
-						self.widget_var[key] = tk.StringVar()
+						app_var['param']['init_tk'][key]['value'] = tk.StringVar()
 				else:
-					self.widget_var[key] = tk.StringVar()
+					app_var['param']['init_tk'][key]['value'] = tk.StringVar()
 
-			self.widget_var[key].set(var_configParse[0][key]['value'])
+			app_var['param']['init_tk'][key]['value'].set(var_configParse[key]['value'])
 
 
 
 	def save_config_file(self, event = None):
 
 		# Association à une variable
-		for key in (self.widget_var):
-			app_var['config']['init'][key]['value'] = self.widget_var[key].get()
+		for key in (app_var['param']['init_tk']):
 
-		config_file = functions.retrieveConfigFile(app_var['config']['init'], False)
+			app_var['param']['init'][key]['value'] = (app_var['param']['init_tk'][key]['value'].get())
+
+		config_file = functions.retrieveConfigFile(app_var['param']['init'], False)
 
 		# Choix du fichier
 		file = fd.asksaveasfilename  (
 			title = "Sauvegarder la configuration",
 			filetypes = [("Fichier de configuration", ".conf"), ("All files", ".*")],
 			defaultextension = ".conf",
-			initialfile = 'configuration',
-			initialdir = app_var['config_file']['dir']
+			initialfile = 'config',
+			initialdir = app_var['software']['config_dir']
 		)
 		
 		with open(file, 'w', encoding='utf-8') as file_content:

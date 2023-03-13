@@ -42,7 +42,7 @@ class rootInterface(ttk.Frame):
 		# Bouton 1
 		self.Button_1 = ttk.Button(
 			self.frame_1, 
-			text = 'Bouton 1'
+			text = 'Valeur 1'
 		)
 		self.Button_1.grid(
 			row = 0,
@@ -52,7 +52,7 @@ class rootInterface(ttk.Frame):
 		# Bouton 2
 		self.Button_2 = ttk.Button(
 			self.frame_1, 
-			text = 'Bouton 2'
+			text = 'Valeur 2'
 		)
 		self.Button_2.grid(
 			row = 0,
@@ -62,7 +62,7 @@ class rootInterface(ttk.Frame):
 		# Bouton 3
 		self.Button_3 = ttk.Button(
 			self.frame_1, 
-			text = 'Bouton 3'
+			text = 'Réinitialiser'
 		)
 		self.Button_3.grid(
 			row = 0,
@@ -72,7 +72,7 @@ class rootInterface(ttk.Frame):
 		# Label
 		self.my_Label = ttk.Label(
 			self.frame_1, 
-			textvariable = parent.widget_var['ma_variable']
+			textvariable = ba_app_var['param']['init_tk']['ma_variable']['value']
 		)
 		self.my_Label.grid(
 			row = 1,
