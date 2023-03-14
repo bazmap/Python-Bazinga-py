@@ -135,7 +135,16 @@ ABAB    ABABABABABABABABABABABABABA    ABABABABABABABABABAB
 """
 
 	message[2] ="""
-Venez voir https://www.arthurbazin.com
+BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG        
+BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG        
+BGBG                                                                        
+BGBG                                                                        
+BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG    BGBG    BGBG        
+BGBG    BGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG    BGBG    BGBG        
+BGBG            BGBG                            BGBG            BGBG        
+BGBG            BGBG                            BGBG            BGBG        
+BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG
+BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBGBGBGBGBGBGBGBGBG    BGBG
 """
 
 	return message[random.randint(1, 2)]
