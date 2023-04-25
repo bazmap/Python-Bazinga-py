@@ -24,6 +24,8 @@ app_var['software']['copyright'] = datetime.datetime.now().strftime("%Y") + " - 
 #app_var['software']['logo'] = ""
 #app_var['software']['icon'] = ""
 #app_var['software']['splash_screen'] = ""
+#app_var['software']['size']['x'] = 1000
+#app_var['software']['size']['y'] = 600
 
 
 

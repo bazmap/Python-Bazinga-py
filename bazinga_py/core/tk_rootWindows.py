@@ -63,6 +63,8 @@ class rootWindows(ba_tk.Tk):
 
 		# Taille maximale
 		self.minsize(400, 400)
+		# Taille de l'application
+		self.geometry(str(app_var['software']['size']['x']) + 'x' + str(app_var['software']['size']['y']))
 
 
 
